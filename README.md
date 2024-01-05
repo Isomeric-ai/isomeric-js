@@ -1,6 +1,7 @@
 # isomeric-js
+Automatically translate unstructured text to machine readable JSON
 
-This javascript SDK is a basic implementation of the Isomeric generate request.
+This package is for integrating with the [Isomeric](https://isomeric.ai) API
 
 # Example Usage
 
