@@ -3,8 +3,7 @@ const default_host = 'https://api.isomeric.ai'
 export class Isomeric {
   access_token: string
   host: string
-  url: string = ""
-  html: string
+  text: string
   schema: any
   data: any
 
@@ -13,16 +12,10 @@ export class Isomeric {
     this.host = host
   }
 
-  setHtml(html: string) {
-    this.html = html
+  setText(text: string) {
+    this.text = text
     return this
   }
-
-  setUrl(url: string) {
-    this.url = url
-    return this
-  }
-
 
   setSchema(schema: any) {
     this.schema = schema
@@ -30,8 +23,6 @@ export class Isomeric {
   }
 
   parse(): Promise<any> {
-    const html = this.html ? this.html : window.document.documentElement.outerHTML
-
     return new Promise((resolve, reject) => {
       fetch(`${this.host}/generate`, {
         method: 'POST',
@@ -40,9 +31,8 @@ export class Isomeric {
           'Authorization': `Bearer ${this.access_token}`
         },
         body: JSON.stringify({
-          html: html,
+          text: this.text,
           schema: this.schema,
-          url: this.url
         })
       })
       .then(response => {
